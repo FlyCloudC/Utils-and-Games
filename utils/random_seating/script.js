@@ -37,9 +37,15 @@ function go(){
 let put = (() => {
   let last;
   return function(){
-    if(last)
-      [last.innerHTML, this.innerHTML, last] = 
-      [this.innerHTML, last.innerHTML, null];
-    else last = this;
+    if(last){
+      [last.innerHTML, this.innerHTML] = 
+        [this.innerHTML, last.innerHTML];
+      last.style.backgroundColor = null;
+      last = null;
+    }
+    else{
+      this.style.backgroundColor = '#ddd';
+      last = this;
+    }
   }
 })();
