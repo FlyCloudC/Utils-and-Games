@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>百度语音合成</title>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <p>
+      语速、音调、音量范围： 0 ~ 15</br>
+      发音人：0 普通女声，1 普通男生，2 度逍遥，3 男声，4 度丫丫，5 女声，6 男声
+    </p>
+    <p>
+    语速：<input id="spd" placeholder="5"></br>
+    音调：<input id="pit" placeholder="5"></br>
+    音量：<input id="vol" placeholder="5"></br>
+    发音人：<input id="per" placeholder="0"></br>
+    文本：</br><textarea id="tex" rows="5"></textarea></br>
+    <button onclick="say()">播放</button>
+    <audio id="preview-audio" controls="controls" autoplay="autoplay"></audio>
+    </p>
+    <p id="show-url" style="word-break: break-all;"></p>
+    <footer>
+      Copyright &copy FLYC飘云 2020
+    </footer>
+  </body>
+</html>
