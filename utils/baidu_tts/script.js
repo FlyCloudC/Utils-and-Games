@@ -11,7 +11,7 @@ window.onload = function () {
 function say() {
   let url = 'http://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&pdt=301';
   for (let [key, { value }] of urlList)
-    if(value)
+    if (value)
       url += `&${key}=${value}`;
   audio.src = url;
   showP.innerHTML = encodeURI(url);
