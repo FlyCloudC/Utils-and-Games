@@ -1,20 +1,18 @@
 let audio, showP;
-let key = ['spd', 'pit', 'vol', 'per', 'tex'];
-let value= [];
+let map = new Map();
 
-function dg(x){return document.getElementById(x);}
-
-window.onload = function(){
-    audio = dg('preview-audio');
-    showP = dg('show-url');
-    for(let i in key) value[i] = dg(key[i]);
+window.onload = function () {
+  audio = document.getElementById('preview-audio');
+  showP = document.getElementById('show-url');
+  for (let key of ['spd', 'pit', 'vol', 'per', 'tex'])
+    map.set(key, document.getElementById(key));
 }
 
-function say(){
-    let url =  'http://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&pdt=301';
-    for(let i in key)
-        if(value[i].value)
-            url += `&${key[i]}=${value[i].value}`;
-    audio.src = url;
-    showP.innerHTML = encodeURI(url);
+function say() {
+  let url = 'http://tts.baidu.com/text2audio?cuid=baike&lan=zh&ctp=1&pdt=301';
+  for (let [key, { value }] of map)
+    if(value)
+      url += `&${key}=${value}`;
+  audio.src = url;
+  showP.innerHTML = encodeURI(url);
 }

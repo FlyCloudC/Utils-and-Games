@@ -38,8 +38,7 @@ let put = (() => {
   let last;
   return function(){
     if(last){
-      [last.innerHTML, this.innerHTML] = 
-        [this.innerHTML, last.innerHTML];
+      [last.innerHTML, this.innerHTML] = [this.innerHTML, last.innerHTML];
       last.style.backgroundColor = null;
       last = null;
     }
