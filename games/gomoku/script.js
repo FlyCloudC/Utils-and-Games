@@ -68,8 +68,8 @@ function countPiece(x, y, dx, dy) {
 }
 
 function checkWin(x, y) {
-  for (let [dx, dy] in [[0, 1], [1, 0], [1, -1], [-1, 1]])
-    if (countPiece(x, t, dx, dy) + countPiece(x, y, -dx, -dy) > 5)
+  for (let [dx, dy] in [[0, 1], [1, 0], [1, 1], [-1, 1]])
+    if (countPiece(x, y, dx, dy) + countPiece(x, y, -dx, -dy) > 5)
       return true;
 }
 
