@@ -72,7 +72,7 @@ function start() {
   mapSize = formSize.value > 0 ? formSize.value : 9;
   blockSideLen = Math.floor(Math.min(screen.availWidth, 500) / mapSize);
   dropSize = blockSideLen * 0.3;
-  sideLen = mapSize * blockSideLen + 2;
+  sideLen = mapSize * blockSideLen;
   canvasBack.width = canvasBack.height = sideLen;
   canvasTop.width = canvasTop.height = sideLen;
   stage.style.height = `${sideLen}px`;

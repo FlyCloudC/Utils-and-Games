@@ -1,10 +1,9 @@
 let names, width, height, seating;
 
 window.onload = () => {
-  names = document.getElementById('form-names');
-  width = document.getElementById('form-width');
-  height = document.getElementById('form-height');
-  seating = document.getElementById('seating');
+  [names, width, height, seating] =
+    ['form-names', 'form-width', 'form-height', 'seating']
+      .map(x => document.getElementById(x));
 }
 
 function shuffle(array) {
@@ -35,8 +34,8 @@ function start() {
 }
 
 function generateNumber() {
-  let x = '';
-  for (let len = width.value * height.value, i = 0; i < len; x += ++i + ',');
+  let len = width.value * height.value, x = '';
+  for (let i = 0; i < len; x += ++i + ',');
   names.value = x.slice(0, -1);
 }
 
@@ -49,7 +48,7 @@ let exchange = (() => {
       last = null;
     }
     else {
-      this.style.backgroundColor = '#ddd';
+      this.style.backgroundColor = '#dddddd';
       last = this;
     }
   }

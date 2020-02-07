@@ -2,8 +2,7 @@ let audio, showP;
 let urlList = new Map();
 
 window.onload = function () {
-  audio = document.getElementById('preview-audio');
-  showP = document.getElementById('show-url');
+  [audio, showP] = ['preview-audio', 'show-url'].map(x => document.getElementById(x));
   for (let key of ['spd', 'pit', 'vol', 'per', 'tex'])
     urlList.set(key, document.getElementById(key));
 }
