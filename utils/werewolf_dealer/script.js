@@ -55,9 +55,16 @@ window.onload = () => {
   }
 
   makeSelectList();
-  inputList = Array.from(document.getElementsByName('checkbox'));
+  inputList = Array.from(document.getElementsByTagName('input'));
   okButton.onclick = ((g) => () => g.next())(game());
-  showCard.style.display = 'none';
+}
+
+function shuffle(array) {
+  for (let i = array.length - 1; i >= 0; --i) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
 
 function makeSelectList() {
@@ -66,26 +73,37 @@ function makeSelectList() {
     let team = teamList[teamId];
     inner.push(`<h2>${team.teamName}阵营</h2>`);
     for (let card of team.repeatedMembers)
-      inner.push(`${card.name}数量：<input id="${card.id}" type="number" placeholder="3"><br />`);
+      inner.push(`${card.name}数量：<input id="${card.id}" type="number" value="3"><br />`);
     for (let card of team.members)
       inner.push(`<input id="${card.id}" type="checkbox" name="checkbox">${card.name}`);
   }
   selectList.innerHTML = inner.join('');
 }
 
-
-
 function* game() {
-  selectList.style.display = 'none';
-  showCard.style.display = 'block';
+  while (true) {
+    selectList.style.display = 'none';
+    showCard.style.display = 'block';
 
+    let cardToDeal = new Array();
+    for (let input of inputList) {
+      let id = input.id;
+      if (input.checked) cardToDeal.push(cardList[id]);
+      else if (input.type == 'number')
+        for (let i = 0; i < input.value; ++i)
+          cardToDeal.push(cardList[id]);
+    }
 
+    for (let card of shuffle(cardToDeal)) {
+      yield;
+      showCard.innerHTML = `${card.name}<br />
+          <img src="https://langrensha.res.netease.com/pc/gw/20190509150909/data/kapai_peo/${card.src}.png" />`;
+      yield;
+      showCard.innerHTML = '';
+    }
 
-  alert(0);
-  yield 1;
-  alert(1);
-  yield 2;
-  selectList.style.display = 'block';
-  showCard.style.display = 'none';
-  return 0;
+    selectList.style.display = 'block';
+    showCard.style.display = 'none';
+    yield;
+  }
 }
