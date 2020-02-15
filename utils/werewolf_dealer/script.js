@@ -111,7 +111,8 @@ function* game() {
     for (let card of cardToDeal) {
       yield;
       showCard.innerHTML = `<h2>${card.name}</h2>
-          <iframe src="https://langrensha.res.netease.com/pc/gw/20190509150909/data/kapai_peo/${card.src}.png" />`;
+          <img src="https://langrensha.res.netease.com/pc/gw/20190509150909/data/kapai_peo/${card.src}.png" 
+          onerror="this.style.visibility='hidden';"/>`;
       yield;
       showCard.innerHTML = '';
     }

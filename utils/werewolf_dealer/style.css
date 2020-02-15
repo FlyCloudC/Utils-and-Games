@@ -17,13 +17,12 @@ h2 {
   width: 50%;
 }
 
-#ok-btn {
+button {
   width: 90%;
   padding: 5px;
 }
 
-iframe {
-  width: 247px;
-  height: 350px;
-  border: none;
+img {
+  width: 100%;
+  max-width: 500px;
 }
