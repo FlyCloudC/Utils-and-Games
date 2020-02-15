@@ -6,35 +6,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>主页</title>
   <script>
-    let utils = [
-      ['random_seating', '随机排座位'],
-      ['baidu_tts', '百度语音合成'],
-      ['werewolf_dealer','狼人杀发牌器']
-    ];
-    let games = [
-      ['ten_drops', '十滴水'],
-      ['gomoku', '五子棋']
-    ];
-    function show(type, pages) {
-      let list = document.getElementById(type);
-      for (let page of pages) {
-        let a = document.createElement('a');
-        a.href = `${type}s/${page[0]}/index.html`;
-        a.innerHTML = page[1] + '<br />';
-        list.appendChild(a);
+    let pages = {
+      utils: {
+        name: '工具',
+        list: [
+          { url: 'random_seating', name: '随机排座位' },
+          { url: 'baidu_tts', name: '百度语音合成' },
+          { url: 'werewolf_dealer', name: '狼人杀发牌器' }
+        ]
+      },
+      games: {
+        name: '小游戏',
+        list: [
+          { url: 'ten_drops', name: '十滴水' },
+          { url: 'gomoku', name: '五子棋' }
+        ]
       }
     }
+
     window.onload = () => {
-      show('util', utils);
-      show('game', games);
+      let footer = document.body.firstChild;
+      for (let typeId in pages) {
+        let type = pages[typeId];
+        let title = document.createElement('h2');
+        title.innerHTML = type.name;
+        document.body.insertBefore(title, footer);
+        let list = document.createElement('p');
+        for (let { url, name } of type.list) {
+          let a = document.createElement('a');
+          a.href = `${typeId}/${url}/index.html`;
+          a.innerHTML = name + '<br />';
+          list.appendChild(a);
+        }
+        document.body.insertBefore(list, footer);
+      }
     }
   </script>
 </head>
 <body>
-  <h2>网页工具</h2>
-  <p id="util"></p>
-  <h2>网页游戏</h2>
-  <p id="game"></p>
   <footer>
     Copyright &copy FLYC飘云 2020
   </footer>

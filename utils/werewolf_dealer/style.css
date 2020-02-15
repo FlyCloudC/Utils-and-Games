@@ -22,7 +22,8 @@ h2 {
   padding: 5px;
 }
 
-img {
-  width: 100%;
-  max-width: 500px;
+iframe {
+  width: 247px;
+  height: 350px;
+  border: none;
 }
