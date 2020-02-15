@@ -75,16 +75,13 @@ function makeSelectList() {
     for (let card of team.repeatedMembers)
       inner.push(`${card.name}数量：<input id="${card.id}" type="number" value="3"><br />`);
     for (let card of team.members)
-      inner.push(`<input id="${card.id}" type="checkbox" name="checkbox">${card.name}`);
+      inner.push(`<div class="box"><input id="${card.id}" type="checkbox" name="checkbox">${card.name}</div>`);
   }
   selectList.innerHTML = inner.join('');
 }
 
 function* game() {
   while (true) {
-    selectList.style.display = 'none';
-    showCard.style.display = 'block';
-
     let cardToDeal = new Array();
     for (let input of inputList) {
       let id = input.id;
@@ -94,16 +91,32 @@ function* game() {
           cardToDeal.push(cardList[id]);
     }
 
-    for (let card of shuffle(cardToDeal)) {
+    if (cardToDeal.length < 3) {
+      alert('人数太少');
       yield;
-      showCard.innerHTML = `${card.name}<br />
+      continue;
+    }
+
+    selectList.style.display = 'none';
+
+    shuffle(cardToDeal);
+
+    for (let k = cardToDeal.length - 2, i = k; i < cardToDeal.length; ++i)
+      if (cardToDeal[i].name == '盗贼') {
+        let j = Math.floor(Math.random() * k);
+        [cardToDeal[i], cardToDeal[j]] = [cardToDeal[j], cardToDeal[i]];
+        alert([i, j]);
+      }
+
+    for (let card of cardToDeal) {
+      yield;
+      showCard.innerHTML = `<h2>${card.name}</h2>
           <img src="https://langrensha.res.netease.com/pc/gw/20190509150909/data/kapai_peo/${card.src}.png" />`;
       yield;
       showCard.innerHTML = '';
     }
 
     selectList.style.display = 'block';
-    showCard.style.display = 'none';
     yield;
   }
 }
