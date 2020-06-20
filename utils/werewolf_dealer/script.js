@@ -109,14 +109,16 @@ function* game() {
       }
 
     for (let card of cardToDeal) {
+      okButton.innerHTML = '查看身份';
       yield;
       showCard.innerHTML = `<h2>${card.name}</h2>
           <img src="https://langrensha.res.netease.com/pc/gw/20190509150909/data/kapai_peo/${card.src}.png" 
           onerror="this.style.visibility='hidden';"/>`;
+      okButton.innerHTML = '我看完了';
       yield;
       showCard.innerHTML = '';
     }
-
+    okButton.innerHTML = '确定';
     selectList.style.display = 'block';
     yield;
   }
