@@ -54,7 +54,7 @@ function query() {
         `${materialList
           .map(([item, count]) => `${item} * ${toGroup(count)}`)
           .join(' + ')
-        } ==(${machine})=> ${product} * ${productCount}
+        } ==(${machine})=> ${product} * ${toGroup(productCount)}
         `
       ).join('</br>')
   );
