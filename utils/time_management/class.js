@@ -1,3 +1,7 @@
+function getDealtDay(time1, time2) {
+  return Math.floor((time1 - time2) / 86400000) + 1;
+}
+
 class Task {
   constructor(title, time, dailyCount) {
     this.title = title;
@@ -19,17 +23,24 @@ class Countdown {
     this.end = end;
   }
   getLeft() {
-    return Math.floor((Date.parse(this.end) - Date.now()) / 86400000) + 1;
+    return getDealtDay(Date.parse(this.end), Date.now())
   }
 }
 
 class Statistic {
-  constructor(){
+  constructor(startDate) {
     this.totalCount = 0;
     this.totalTime = 0;
 
     this.todayCount = 0;
-    this.todaytime = 0
+    this.todaytime = 0;
+    this.startDate = startDate;
+  }
+  getDays() {
+    return
+  }
+  getDailyTime() {
+    return this.totalTime / getDealtDay(Date.now(), this.startDate);
   }
 }
 /*
