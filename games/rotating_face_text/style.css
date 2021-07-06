@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+}
+
+#stage {
+  display: none;
+}
+
+canvas {
+  position: absolute;
+}
+
+#back-layer {
+  z-index: 1;
+}
+
+#top-layer {
+  z-index: 2;
+}
