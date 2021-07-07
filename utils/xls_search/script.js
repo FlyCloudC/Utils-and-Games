@@ -21,8 +21,7 @@ function importFile(event) {
 	reader.onload = (event) => {
 		let binary_data = event.currentTarget.result;
 		let data = XLSX.read(binary_data, { type: 'binary' });
-		let output = data.Strings.map(x => x.t);
-		table = toTable(output);
+		table = toTable(data);
 		localStorage.setItem('table', JSON.stringify(table));
 	}
 
@@ -32,17 +31,15 @@ function importFile(event) {
 function isDigital(x) { return !isNaN(Number(x)); }
 
 function toTable(data) { // data array
-	let bandId;
-	let output = new Map();
-	let i = 3;
-	while (i < data.length) {
-		let ECI = data[i++];
-		let name = data[i++];
-		if (!isDigital(data[i]))
-			bandId = data[i++];
-		output[ECI] = { name, bandId };
+	let table = new Map();
+	let sheet = data.Sheets.Sheet1;
+	for (let i = 2; sheet['A' + i]; ++i) {
+		if (!isDigital(sheet['A' + i].v))
+			continue;
+		let [id, name, bandId] = ['A', 'B', 'C'].map(x => sheet[x + i]?.v);
+		table[id] = { name, bandId };
 	}
-	return output;
+	return table;
 }
 
 function find() {
@@ -53,10 +50,10 @@ function find() {
 	let id = idInput.value;
 	let data = table[id];
 	if (!data) {
-		showP.innerHTML = '未找到对应基站';
+		showP.innerHTML = '未找到对应数据';
 		return;
 	}
-	showP.innerHTML = `名称：${data.name}<br />载扇频段标识：${data.bandId}`;
+	showP.innerHTML = `B列：${data.name}<br />C列：${data.bandId}`;
 }
 
 function deleteTable() {
