@@ -7,21 +7,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>时间管理</title>
   <link rel="stylesheet" href="style.css" />
-  <script src="class.js"></script>
-  <script src="script.js"></script>
+  <script src="script/utils.js"></script>
+  <script src="script/user.js"></script>
+  <script src="script/ui.js"></script>
+  <script src="script/script.js"></script>
 </head>
 
 <body>
-  <div id="menu">
-    <div id="task-list">
-      
-    </div>
-    <div id="countdown-list"></div>
-    <div id="statistic-list"></div>
+  <div class="top-view">
+    <h2 class="top-view-title">任务</h2>
+    <button class="top-view-button" id="add-button">＋</button>
   </div>
-  <footer>
-    Copyright &copy FLYC飘云 2020
-  </footer>
+  <div class="main-view">
+    <div class="card-list" id="task-view"></div>
+    <div class="card-list" id="countdown-view"></div>
+    <div id="statistic-view"></div>
+    <div id="setting-view"></div>
+  </div>
+  <div class="foot-view">
+    <div id="choose-task-button" class="foot-view-ele">
+      <img class="foot-view-img" src="./assets/task.png">
+      <h5 class="foot-view-title">任务</h5>
+    </div>
+    <div id="choose-statistic-button" class="foot-view-ele">
+      <img class="foot-view-img" src="./assets/statistic.png">
+      <h5 class="foot-view-title">统计</h5>
+    </div>
+    <div id="choose-countdown-button" class="foot-view-ele">
+      <img class="foot-view-img" src="./assets/countdown.png">
+      <h5 class="foot-view-title">倒计时</h5>
+    </div>
+    <div id="choose-setting-button" class="foot-view-ele">
+      <img class="foot-view-img" src="./assets/setting.png">
+      <h5 class="foot-view-title">设置</h5>
+    </div>
+  </div>
 </body>
 
 </html>
