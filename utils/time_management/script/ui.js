@@ -44,14 +44,13 @@ class UI {
 
     if (this.showingView == this.view.taskView) {
       this.button.addButton.style.display = 'inline-block';
-      this.button.onclick = () => {
-
+      this.button.addButton.onclick = () => {
         user.addTask();
       };
     }
     else if (this.showingView == this.view.countdownView) {
       this.button.addButton.style.display = 'inline-block';
-      this.button.onclick = () => {
+      this.button.addButton.onclick = () => {
         user.addCountdown();
       };
     }
@@ -71,8 +70,20 @@ class UI {
 
   }
 
+  createTaskCard() {
+    let editDiv = Utils.createElement('div', 'card');
+    let titleInput = Utils.createElement('input');
+    let descriptionInput = Utils.createElement('input');
+    let timeInput = Utils.createElement('input');
+    let okButton = Utils.createElement('button', 'edit-card-button');
+    let cancelButton = Utils.cancelButton('button', 'edit-card-button');
+
+    let
+
+  }
+
   addTaskCard(task) {
-    let taskCardDiv = Utils.createElement('div', 'task-card');
+    let taskCardDiv = Utils.createElement('div', 'card');
     let taskCardLeftDiv = Utils.createElement('div', 'task-card-left');
     let taskTitleH3 = Utils.createElement('h3', 'task-title');
     taskTitleH3.innerHTML = task.title;
