@@ -1,25 +1,41 @@
 ﻿let sourceForm, outputForm;
 
 window.onload = () => {
-  [sourceForm, outputForm] =
-    ['form-source', 'form-output']
+  [sourceForm, outputForm, errorForm] =
+    ['form-source', 'form-output', 'form-error']
       .map(x => document.getElementById(x));
   sourceForm.value = localStorage.getItem('last_run');
 }
 
 function run() {
   let code = sourceForm.value;
-  let mainExp = parse(code);
-  let output = [];
+  try {
+    let mainExp = parse(code);
+    let output = [];
 
-  for (let exp of mainExp) {
-    let value = eval(exp, basedEmv);
-    if (value !== undefined)
-      output.push(value);
+    for (let exp of mainExp) {
+      let value = eval(exp, basedEmv);
+      if (value !== undefined)
+        output.push(value);
+    }
+    console.log(output);
+    outputForm.value = output.map(unEval).join('\n');
+    errorForm.value = null;
   }
-  console.log(output);
-  outputForm.value = output.map(unEval).join('\n');
-  localStorage.setItem('last_run', code);
+  catch (err) {
+    outputForm.value = null;
+    if (typeof err === 'string')
+      errorForm.value = `Error in Lisp: ${err}`;
+    else if (err instanceof ParseError) {
+      errorForm.value = `Error in parse: ${err.message}`;
+    } else {
+      errorForm.value = `Error in JavaScript: ${err.message}`;
+      throw err;
+    }
+  }
+  finally {
+    localStorage.setItem('last_run', code);
+  }
 }
 
 function saveFile() {

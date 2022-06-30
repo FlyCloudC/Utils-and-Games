@@ -1,3 +1,5 @@
+class ParseError extends Error { }
+
 function parse(code) {
   let c1 = ` ${code}\n`
     .replace(/;(.*?)\n/g, '')
@@ -28,6 +30,8 @@ function parse(code) {
         expList[++nowExpIndex] = [];
         break;
       case ')':
+        if (nowExpIndex === 0)
+          throw new ParseError(`unexpected ')'`);
         expList[nowExpIndex - 1].push(expList[nowExpIndex]);
         --nowExpIndex;
         break;
@@ -36,7 +40,7 @@ function parse(code) {
     }
   }
   if (nowExpIndex !== 0)
-    throw `Exception: missing ${nowExpIndex} ')'`;
+    throw new ParseError(`missing ${nowExpIndex} ')'`);
 
   return expList[0];
 }
