@@ -1,0 +1,61 @@
+﻿html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  max-height: 90%;
+  padding: 4px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.source-sec {
+  max-height: 100%;
+  width: 70%;
+  padding: 4px;
+}
+
+.running-sec {
+  width: 25%;
+  padding: 4px;
+}
+
+@media screen and (max-width: 500px) {
+  .row {
+    flex-direction: column;
+    max-height: fit-content;
+    align-items: center;
+  }
+
+  .source-sec {
+    width: 90%;
+  }
+
+  .running-sec {
+    width: 90%;
+  }
+}
+
+textarea {
+  height: 40%;
+  width: 95%;
+  margin: 10px 0;
+  padding: 4px 1%;
+  border: 1px solid;
+  border-radius: 4px;
+  box-shadow: 0 0 3px 0px #000f;
+  font-size: 15px;
+  font-family: "Consolas";
+  resize: none;
+}
+
+.source-sec textarea {
+  height: 90%;
+}
+
+footer {
+  margin: 4px 2%;
+}
