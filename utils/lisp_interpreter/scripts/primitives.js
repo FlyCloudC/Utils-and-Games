@@ -85,8 +85,6 @@ const primitiveList = [
       fname,
       arglen => arglen > 0,
       args => {
-        if (args.length === 0)
-          throw `Exception: incorrect argument count in call (${fname})`;
         numberCheck(args, fname);
         for (let i = 1; i < args.length; ++i) {
           if (!cmp[fname](args[i - 1], args[i]))

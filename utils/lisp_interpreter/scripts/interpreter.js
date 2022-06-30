@@ -115,7 +115,7 @@ function evalList(expList, env) {
 function apply(procedure, args) {
   if (procedure instanceof Closure) {
     if (procedure.head.length !== args.length)
-      throw `Exception: incorrect number of arguments to ${procedure}`;
+      throw `Exception: incorrect number of arguments to ${unEval(procedure)}`;
     let res;
     let newEmv = bindVar(procedure.head, args, procedure.env);
     for (let exp of procedure.body) {
@@ -125,7 +125,7 @@ function apply(procedure, args) {
   }
   else if (procedure instanceof PrimitiveFunction) {
     if (!procedure.checkArgCount(args.length))
-      throw `Exception: incorrect number of arguments to ${procedure}`;
+      throw `Exception: incorrect number of arguments to ${unEval(procedure)}`;
     return procedure.process(args);
   }
   else
