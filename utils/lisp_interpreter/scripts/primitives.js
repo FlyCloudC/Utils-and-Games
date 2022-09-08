@@ -132,6 +132,12 @@ const primitiveList = [
       arglen => arglen === 1,
       args => args[0] === null,
     ),
+
+    new PrimitiveFunction(
+      'pair?',
+      arglen => arglen === 1,
+      args => args[0] instanceof Pair,
+    ),
   )
 }
 
