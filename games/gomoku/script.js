@@ -31,7 +31,8 @@ function undo() {
 
 function putPiece(x, y) {
   board[x][y] = color;
-  if (checkWin(x, y)) alert(`${color == 1 ? '黑' : '白'}方胜利`);
+  if (checkWin(x, y))
+    setTimeout(() => alert(`${color == 2 ? '黑' : '白'}方胜利`), 100);
   lastPut.push([x, y]);
 
   [x, y] = [x, y].map(x => (2 * x + 1) * halfSideLen);
